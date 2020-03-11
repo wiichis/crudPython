@@ -36,11 +36,11 @@ def list_clients():
             email=client['email'],
             position=client['position']))
 
-def update_client(idx, updated_client_name):
+def update_client(client_id, updated_client):
     global clients
 
-    if idx in clients:
-        clients[idx] = updated_client_name
+    if len(clients) - 1 >= client_id:
+        clients[client_id] = updated_client
     else:
         _message_client_is_not_in_list()
 
@@ -79,20 +79,15 @@ def _get_client_field(field_name):
 
     return field
 
-def _get_client_name():
-    client_name = None
+def _get_client_from_user():
+    client = {
+        'name': _get_client_field('name'),
+        'company': _get_client_field('company'),
+        'email': _get_client_field('email'),
+        'position': _get_client_field('position'),
+    }
 
-    while not client_name:
-        client_name = input('What is the client name? ')
-
-        if client_name == 'exit':
-            client_name = None
-            break
-
-    if not client_name:
-        sys.exit()
-
-    return client_name
+    return client
 
 
 def _message_client_is_not_in_list():
@@ -131,9 +126,10 @@ if __name__ == '__main__':
         else:
             _message_client_is_not_in_list()
     elif command == 'U':
-        client_name = _get_client_name()
-        updated_client_name = input('What is updated client name? ')
-        update_client(client_name, updated_client_name)
+        client_id = int(_get_client_field('id'))
+        updated_client = _get_client_from_user()
+
+        update_client(client_id, updated_client)
         list_clients()
     else:
         print('Invalid command')
