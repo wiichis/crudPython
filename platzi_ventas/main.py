@@ -45,11 +45,11 @@ def update_client(client_id, updated_client):
         _message_client_is_not_in_list()
 
 
-def delete_client(client_name):
+def delete_client(client_id):
     global clients
 
-    if client_name in clients:
-        clients.remove(client_name)
+    if len(clients) - 1 >= client_id:
+        clients.pop(client_id)
     else:
         _message_client_is_not_in_list()
 
@@ -91,7 +91,7 @@ def _get_client_from_user():
 
 
 def _message_client_is_not_in_list():
-    print('The client: {} is not in our client\' list'.format(client_name))
+    print('The client\'s is not in our client\' list')
 
 def _message_client_is_in_list():
     print('The client: {} is in our client\' list'.format(client_name))
@@ -114,8 +114,8 @@ if __name__ == '__main__':
     elif command == 'L':
         list_clients()
     elif command == 'D':
-        client_name = _get_client_name()
-        delete_client(client_name)
+        client_id = int(_get_client_field('id'))
+        delete_client(client_id)
         list_clients()
     elif command == 'S':
         client_name = _get_client_name()
