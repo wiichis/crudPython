@@ -14,8 +14,6 @@ clients = [
         'email': 'ricado@facebook.com',
         'position': 'Data engineer'
     }
-
-
 ]
 
 def create_client(client):
@@ -55,11 +53,13 @@ def delete_client(client_id):
 
 
 def search_client(client_name):
-    for client in clients:
-        if client != client_name:
-            continue
-        else:
-            return True
+    client_dic = clients.values()
+    if client_name in client_dic:
+        return true
+    else:
+        return false
+
+
 
 def _print_welcome():
     print('WELCOME TO PLATZI VENTAS')
@@ -113,18 +113,20 @@ if __name__ == '__main__':
         list_clients()
     elif command == 'L':
         list_clients()
+
     elif command == 'D':
         client_id = int(_get_client_field('id'))
         delete_client(client_id)
         list_clients()
-    elif command == 'S':
-        client_name = _get_client_name()
-        found = search_client(client_name)
 
+    elif command == 'S':
+        client_name = _get_client_field('name')
+        found = search_client(client_name)
         if found:
             _message_client_is_in_list()
         else:
             _message_client_is_not_in_list()
+
     elif command == 'U':
         client_id = int(_get_client_field('id'))
         updated_client = _get_client_from_user()
