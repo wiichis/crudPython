@@ -13,6 +13,12 @@ clients = [
         'company': 'Facebook',
         'email': 'ricado@facebook.com',
         'position': 'Data engineer'
+    },
+    {
+        'name': "will",
+        'company': 'w',
+        'email': 'w',
+        'position': 'w'
     }
 ]
 
@@ -22,7 +28,7 @@ def create_client(client):
     if client not in clients:
         clients.append(client)
     else:
-        print('Client {} already is in the client\'s list'.format(client_name))
+        print('Client {} already is in the client\'s list'.format(client['name']))
 
 
 def list_clients():
