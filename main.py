@@ -40,6 +40,7 @@ def list_clients():
             email=client['email'],
             position=client['position']))
 
+
 def update_client(client_id, updated_client):
     global clients
 
@@ -59,12 +60,12 @@ def delete_client(client_id):
 
 
 def search_client(client_name):
-    client_dic = clients.values()
-    if client_name in client_dic:
-        return true
-    else:
-        return false
+    global clients
 
+    for client in clients:
+        for data in client.values():
+            if client_name == data:
+                return True
 
 
 def _print_welcome():
@@ -76,6 +77,7 @@ def _print_welcome():
     print('[U]pdate client')
     print('[D]elete client')
     print('[S]earch client')
+
 
 def _get_client_field(field_name):
     field = None
@@ -97,10 +99,11 @@ def _get_client_from_user():
 
 
 def _message_client_is_not_in_list():
-    print('The client\'s is not in our client\' list')
+    print('The client: {} is not in our client\'s list'.format(client_name))
+
 
 def _message_client_is_in_list():
-    print('The client: {} is in our client\' list'.format(client_name))
+    print('The client: {} is in our client\'s list'.format(client_name))
 
 if __name__ == '__main__':
     _print_welcome()
@@ -130,8 +133,9 @@ if __name__ == '__main__':
         found = search_client(client_name)
         if found:
             _message_client_is_in_list()
-        else:
+        else: 
             _message_client_is_not_in_list()
+        
 
     elif command == 'U':
         client_id = int(_get_client_field('id'))
